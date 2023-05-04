@@ -15,7 +15,7 @@
         width: 100vw;
         height: 100vh;
         font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #153777, #4e086f);
+        background: linear-gradient(135deg, #313336, #868687);
         filter: contrast(2);
       }
 
@@ -25,13 +25,14 @@
         font-weight: bolder;
         text-transform: uppercase;
         word-spacing: 2.5px;
-        color: #4414af;
+        color: #f8f7f9;
       }
 
       .container {
         width: 100%;
+        height: 100%;
         max-width: 600px;
-        margin: 100px auto 20px;
+        margin: 10px auto ;
         padding: 40px 30px 70px;
         background: #120e0e;
         border-radius: 12px;
@@ -46,26 +47,38 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: #edeef0;
+        background-color: #5a5858;
         border-radius: 30px;
         padding-left: 30px;
         margin-bottom: 25px;
-        user-select: none;
       }
 
       input[type="text"] {
         flex: 1;
         border: none;
         outline: none;
-        background: transparent;
-        padding: 10px;
+        padding: 10px 10px 10px 60px;
         font-weight: 14px;
-        color: #fffeff;
+        background: transparent;
+        color: #fff;
         font-weight: 580;
-        font-size: 14px;
+        text-transform: capitalize;
+        font-size: 20px;
         letter-spacing: 1.2px;
       }
-
+      form::before {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        color: #fff;
+        border-radius: 30%;
+        background-image:url(task\ logo.png);
+        background-size: cover;
+        background-position: center;
+        top: 9px;
+        left: 12px;
+      }
       form span {
         position: absolute;
         bottom: -15px;
@@ -112,7 +125,7 @@
         background: transparent;
         display: flex;
         align-items: center;
-        color: #4414af;
+        color: #7e7a7a;
         font-weight: 800;
         transition: 3s linear;
         user-select: none;
@@ -123,8 +136,8 @@
         cursor: pointer;
       }
       .option span.active {
-        background-color: #4414af;
-        color: #fff;
+        background-color: #7e7a7a;
+        color: #111010;
         border-radius: 15px;
       }
       .option button {
@@ -153,6 +166,7 @@
         font-size: 17px;
         padding: 12px 80px 12px 70px;
         cursor: pointer;
+        text-transform: capitalize;
         word-wrap: break-word;
         word-break: break-all;
         user-select: none;
@@ -203,7 +217,7 @@
     <div class="container">
       <h1>To-Do List App</h1>
       <form>
-        <input id="inputbox" type="text" placeholder="Enter a task..." />
+        <input id="inputbox" type="text" placeholder="Enter your task here" />
         <span id="error"></span>
         <button type="button" onclick="addTask()">Add Task</button>
       </form>
