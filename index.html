@@ -1,236 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>to-do-App</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>to-do-App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #313336, #868687);
+      filter: contrast(2);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bolder;
+      text-transform: uppercase;
+      word-spacing: 2.5px;
+      color: #f8f7f9;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 40px 30px 70px;
+      background: #120e0e;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        max-width: 90%;
       }
-      body {
-        width: 100vw;
-        height: 100vh;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #313336, #868687);
-        filter: contrast(2);
+    }
+
+    form {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #5a5858;
+      border-radius: 30px;
+      padding-left: 30px;
+      margin-bottom: 25px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 10px 10px 10px 60px;
+      font-weight: 14px;
+      background: transparent;
+      color: #fff;
+      font-weight: 580;
+      text-transform: capitalize;
+      font-size: 20px;
+      letter-spacing: 1.2px;
+    }
+
+    form::before {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      color: #fff;
+      border-radius: 30%;
+      background-image: url(task\ logo.png);
+      background-size: cover;
+      background-position: center;
+      top: 9px;
+      left: 12px;
+    }
+
+    form span {
+      position: absolute;
+      bottom: -15px;
+      left: 20px;
+      color: rgb(243, 42, 42);
+      font-size: 10px;
+      text-transform: capitalize;
+      letter-spacing: 1.72px;
+      font-weight: 700;
+      opacity: 0.9;
+      transform: scale(0.94);
+      animation: scale 5s infinite cubic-bezier(0.4, 1, 0.89, 1);
+    }
+
+    @keyframes scale {
+      0% {
+        transform: scale(0);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    form button {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 15px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      outline: none;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #3e8e41;
+    }
+
+    .option {
+      position: relative;
+      width: 100%;
+      margin: 0 auto 20px;
+      height: 30px;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      color: #7e7a7a;
+      font-weight: 800;
+      transition: 3s linear;
+      user-select: none;
+    }
+
+    .option span {
+      margin: 0 auto;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .option span.active {
+      background-color: #7e7a7a;
+      color: #111010;
+      border-radius: 15px;
+    }
+
+    .option button {
+      position: absolute;
+      bottom: -50px;
+      right: -10px;
+      background: rgb(252, 5, 26);
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .disableDeleteAll {
+      display: none;
+    }
+
+    .enableDeleteAll {
+      display: block;
+    }
+
+    .option button:active {
+      background: transparent;
+      color: rgb(252, 5, 26);
+      transition: 83ms;
+    }
+
+    ul {
+      margin-top: 50px;
+    }
+
+    ul li {
+      position: relative;
+      list-style: none;
+      font-size: 17px;
+      padding: 12px 80px 12px 70px;
+      cursor: pointer;
+      text-transform: capitalize;
+      word-wrap: break-word;
+      word-break: break-all;
+      user-select: none;
+      color: #fff;
+    }
+
+    ul li::before {
+      content: "";
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background-color: #cdcfcf;
+      background-size: cover;
+      background-position: center;
+      top: 9px;
+      left: 12px;
+    }
+
+    ul li.checked {
+      color: #94a193;
+      text-decoration: line-through;
+    }
+
+    ul li.checked::before {
+      background-image: url(checked.png);
+    }
+
+    .delete-btn {
+      position: absolute;
+      right: 0;
+      background-color: #ff434376;
+      color: white;
+      padding: 5px;
+      font-weight: 800;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .delete-btn:hover {
+      background-color: #ff0000;
+    }
+
+    @media (max-width:450px) {
+      .container {
+        min-width: 100vw;
+        margin: 0;
+        padding: 60px 30px 10px;
+        border-radius: 0px;
       }
 
       h1 {
-        text-align: center;
-        margin-bottom: 20px;
-        font-weight: bolder;
-        text-transform: uppercase;
-        word-spacing: 2.5px;
-        color: #f8f7f9;
+        margin: 0px auto 30px;
       }
 
-      .container {
-        width: 100%;
-        height: 100%;
-        max-width: 600px;
-        margin: 10px auto ;
-        padding: 40px 30px 70px;
-        background: #120e0e;
-        border-radius: 12px;
-      }
-      @media (max-width: 600px) {
-        .container {
-          max-width: 90%;
-        }
-      }
       form {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #5a5858;
-        border-radius: 30px;
-        padding-left: 30px;
-        margin-bottom: 25px;
+        min-width: 80vw;
+        flex-direction: column;
+        background-color: transparent;
+        border-radius: 0px;
+        padding: 0;
+        margin-bottom: 30px;
+        user-select: none;
       }
 
       input[type="text"] {
-        flex: 1;
-        border: none;
-        outline: none;
-        padding: 10px 10px 10px 60px;
-        font-weight: 14px;
-        background: transparent;
-        color: #fff;
-        font-weight: 580;
-        text-transform: capitalize;
-        font-size: 20px;
-        letter-spacing: 1.2px;
+        flex: 0;
+        width: 100%;
+        padding: 20px 10px 20px 70px;
+        background: #5a5858;
+        border-radius: 25px;
+        font-size: 15px;
+        margin-bottom: 10px;
       }
+
       form::before {
-        content: "";
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        color: #fff;
-        border-radius: 30%;
-        background-image:url(task\ logo.png);
-        background-size: cover;
-        background-position: center;
-        top: 9px;
-        left: 12px;
+        top: 15px;
+        left: 15px;
       }
+
       form span {
         position: absolute;
-        bottom: -15px;
-        left: 20px;
-        color: rgb(243, 42, 42);
-        font-size: 10px;
-        text-transform: capitalize;
-        letter-spacing: 1.72px;
-        font-weight: 700;
-        opacity: 0.9;
-        transform: scale(0.94);
-        animation: scale 5s infinite cubic-bezier(0.4, 1, 0.89, 1);
-      }
-      @keyframes scale {
-        0% {
-          transform: scale(0);
-        }
-        100% {
-          transform: scale(1);
-        }
+        top: -20px;
+        left: 30px;
+        bottom: 100%;
+        overflow: hidden;
       }
 
       form button {
-        font-size: 13px;
-        font-weight: 600;
-        padding: 15px;
-        background-color: #4caf50;
-        color: white;
-        border: none;
-        outline: none;
-        border-radius: 40px;
-        cursor: pointer;
-      }
-
-      form button:hover {
-        background-color: #3e8e41;
+        font-size: 18px;
+        font-weight: 900;
+        padding: 15px 70px;
+        border-radius: 25px;
       }
 
       .option {
-        position: relative;
-        width: 100%;
-        margin: 0 auto 20px;
-        height: 30px;
-        background: transparent;
-        display: flex;
-        align-items: center;
-        color: #7e7a7a;
-        font-weight: 800;
-        transition: 3s linear;
-        user-select: none;
+        margin: 0 auto 50px;
       }
+
       .option span {
-        margin: 0 auto;
-        padding: 5px 10px;
-        cursor: pointer;
-      }
-      .option span.active {
-        background-color: #7e7a7a;
-        color: #111010;
         border-radius: 15px;
-      }
-      .option button {
-        position: absolute;
-        bottom: -40px;
-        right: -10px;
-        background: rgb(252, 5, 26);
-      }
-      .disableDeleteAll {
-        display: none;
-      }
-      .enableDeleteAll {
-        display: block;
-      }
-      .option button:active {
-        background: transparent;
-        color: rgb(252, 5, 26);
-        transition: 83ms;
-      }
-      ul {
-        margin-top: 50px;
-      }
-      ul li {
-        position: relative;
-        list-style: none;
-        font-size: 17px;
-        padding: 12px 80px 12px 70px;
-        cursor: pointer;
-        text-transform: capitalize;
-        word-wrap: break-word;
-        word-break: break-all;
-        user-select: none;
-        color: #fff;
-      }
-
-      ul li::before {
-        content: "";
-        position: absolute;
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        background-color: #cdcfcf;
-        background-size: cover;
-        background-position: center;
-        top: 9px;
-        left: 12px;
-      }
-      ul li.checked {
-        color: #555;
-        text-decoration: line-through;
-      }
-
-      ul li.checked::before {
-        background-image: url(checked.png);
       }
 
       .delete-btn {
-        position: absolute;
-        right: 0;
-        background-color: #ff434376;
-        color: white;
-        padding: 5px;
-        font-weight: 800;
-        border: none;
-        outline: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
+        padding: 10px;
       }
 
-      .delete-btn:hover {
-        background-color: #ff0000;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>To-Do List App</h1>
-      <form>
-        <input id="inputbox" type="text" placeholder="Enter your task here" />
-        <span id="error"></span>
-        <button type="button" onclick="addTask()">Add Task</button>
-      </form>
-      <div class="option" id="option">
-        <span id="all" class="active">All</span>
-        <span id="pending">Pending</span>
-        <span id="complete">Complete</span>
-        <button class="enableDeleteAll delete-btn" id="delete-btn">
-          Delete All
-        </button>
-      </div>
-      <ul id="list"></ul>
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>To-Do List App</h1>
+    <form>
+      <input id="inputbox" type="text" placeholder="Enter your task here" />
+      <span id="error"></span>
+      <button type="button" onclick="addTask()">Add Task</button>
+    </form>
+    <div class="option" id="option">
+      <span id="all" class="active">All</span>
+      <span id="pending">Pending</span>
+      <span id="complete">Complete</span>
+      <button class="enableDeleteAll delete-btn" id="delete-btn">
+        Delete All
+      </button>
     </div>
-    <script src="to-do.js"></script>
-  </body>
+    <ul id="list"></ul>
+  </div>
+  <script src="to-do.js"></script>
+</body>
+
 </html>
